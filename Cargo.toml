@@ -1,0 +1,41 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/daily-briefing",
+    "crates/daily-briefing-core",
+    "crates/input-fever",
+    "crates/input-home-assistant-metrics",
+    "crates/processor-anthropic",
+    "crates/output-home-assistant",
+    "crates/output-webpage",
+    "crates/output-speech",
+    "crates/webserver",
+]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+thiserror = "2"
+clap = { version = "4", features = ["derive"] }
+reqwest = { version = "0.12", features = ["rustls-tls", "json"], default-features = false }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "signal"] }
+async-trait = "0.1"
+exitcode = "1"
+md5 = "0.7"
+futures = "0.3"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+axum = "0.8"
+pulldown-cmark = "0.13"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde"] }
+cron = "0.12"
+output-webpage = { path = "crates/output-webpage" }
+output-speech = { path = "crates/output-speech" }
+webserver = { path = "crates/webserver" }
+daily-briefing-core = { path = "crates/daily-briefing-core" }
+input-fever = { path = "crates/input-fever" }
+processor-anthropic = { path = "crates/processor-anthropic" }
+output-home-assistant = { path = "crates/output-home-assistant" }
+input-home-assistant-metrics = { path = "crates/input-home-assistant-metrics" }

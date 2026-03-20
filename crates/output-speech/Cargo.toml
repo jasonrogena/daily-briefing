@@ -1,0 +1,15 @@
+[package]
+name = "output-speech"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "output_speech"
+path = "src/lib.rs"
+
+[dependencies]
+daily-briefing-core = { workspace = true }
+async-trait = { workspace = true }
+webserver = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

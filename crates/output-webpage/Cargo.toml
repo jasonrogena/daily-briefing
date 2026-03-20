@@ -1,0 +1,13 @@
+[package]
+name = "output-webpage"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+daily-briefing-core = { workspace = true }
+async-trait = { workspace = true }
+webserver = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+pulldown-cmark = { workspace = true }
+chrono = { workspace = true }

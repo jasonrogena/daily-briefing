@@ -1,0 +1,18 @@
+[package]
+name = "input-home-assistant-metrics"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "input_home_assistant_metrics"
+path = "src/lib.rs"
+
+[dependencies]
+daily-briefing-core = { workspace = true }
+async-trait = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }

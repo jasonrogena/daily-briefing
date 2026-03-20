@@ -1,0 +1,15 @@
+[package]
+name = "webserver"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "webserver"
+path = "src/lib.rs"
+
+[dependencies]
+tokio = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+axum = { workspace = true }
+base64 = { workspace = true }

@@ -1,0 +1,66 @@
+[[inputs]]
+name = "energy"
+type = "home_assistant_metrics"
+url = "http://homeassistant.local:8123"
+token_env = "HA_TOKEN"
+hours = 24  # length of each comparison window (default: 24)
+
+[[inputs.entities]]
+id = "sensor.grid_consumption_energy"
+label = "Grid consumption"
+
+[[inputs.entities]]
+id = "sensor.solar_production_energy"
+label = "Solar production"
+
+[[inputs]]
+name = "rss_feed"
+type = "fever"
+url = "http://yarr.local:7070/fever/"
+username_env = "FEVER_USERNAME"
+password_env = "FEVER_PASSWORD"
+# How many hours back to fetch items (default: 24)
+hours = 24
+# Mark fetched items as read in yarr after collection (default: false)
+mark_as_read = true
+
+[processor]
+type = "anthropic"
+api_key_env = "ANTHROPIC_API_KEY"
+model = "claude-opus-4-6"
+max_tokens = 1024
+prompt = "Summarize the following content into a concise daily briefing. Focus on the most important information and group related topics together. The summary should be just paragraphs and readable as a podcast"
+
+# Cron schedule for the pipeline (standard 5-field: min hour dom month dow).
+# Examples: "0 8 * * *" = daily at 08:00, "0 6 * * 1-5" = weekdays at 06:00.
+# Remove this section to run once and exit.
+[schedule]
+cron = "0 8 * * *"
+
+# Shared web server — required when using webpage or speech outputs.
+# Authentication is configured here and applies to all endpoints.
+[webserver]
+host = "0.0.0.0"        # defaults to 0.0.0.0 if omitted
+port = 8080
+username_env = "BRIEFING_USERNAME"
+password_env = "BRIEFING_PASSWORD"
+
+[[outputs]]
+name = "home_assistant_summary"
+type = "home_assistant"
+url = "http://homeassistant.local:8123"
+token_env = "HA_TOKEN"
+title = "Daily Summary"
+notification_id = "daily_briefing"
+
+[[outputs]]
+name = "webpage"
+type = "webpage"
+endpoint = "/"
+title = "Daily Briefing"
+
+[[outputs]]
+name = "speech"
+type = "speech"
+endpoint = "/speech"
+model = "/etc/daily-briefing/voices/en_US-lessac-medium.onnx"

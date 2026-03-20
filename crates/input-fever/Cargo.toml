@@ -1,0 +1,18 @@
+[package]
+name = "input-fever"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+daily-briefing-core = { workspace = true }
+async-trait = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+md5 = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

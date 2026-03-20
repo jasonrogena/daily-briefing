@@ -1,0 +1,38 @@
+[package]
+name = "daily-briefing"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "daily-briefing"
+path = "src/main.rs"
+
+[lib]
+name = "daily_briefing"
+path = "src/lib.rs"
+
+[dependencies]
+daily-briefing-core = { workspace = true }
+input-fever = { workspace = true }
+input-home-assistant-metrics = { workspace = true }
+processor-anthropic = { workspace = true }
+output-home-assistant = { workspace = true }
+output-webpage = { workspace = true }
+output-speech = { workspace = true }
+webserver = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+futures = { workspace = true }
+exitcode = { workspace = true }
+cron = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tempfile = "3"
