@@ -99,6 +99,7 @@ fn make_entity(id: &str, label: Option<&str>) -> EntityConfig {
     EntityConfig {
         id: id.to_string(),
         label: label.map(str::to_string),
+        kind: crate::EntityKind::Cumulative,
     }
 }
 

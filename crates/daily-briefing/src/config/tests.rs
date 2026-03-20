@@ -173,6 +173,7 @@ title = "Daily Briefing"
 name = "audio"
 type = "speech"
 endpoint = "/briefing.wav"
+model = "/voices/en_US-lessac-medium.onnx"
 "#;
     let config: Config = toml::from_str(toml_str).unwrap();
     assert!(config.validate().is_ok());

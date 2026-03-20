@@ -9,7 +9,7 @@ fn test_synthesize_fails_gracefully_when_piper_missing() {
     match result {
         Err(_) => {
             // piper not installed — confirm our synthesize() returns Err
-            let err = synthesize("hello", "/nonexistent/model.onnx").unwrap_err();
+            let err = synthesize("hello", "/nonexistent/model.onnx", None).unwrap_err();
             assert!(
                 err.to_string().contains("piper"),
                 "error should mention piper: {err}"
@@ -17,7 +17,7 @@ fn test_synthesize_fails_gracefully_when_piper_missing() {
         }
         Ok(_) => {
             // piper is installed but we have no model — should return Err cleanly
-            let err = synthesize("hello", "/nonexistent/model.onnx").unwrap_err();
+            let err = synthesize("hello", "/nonexistent/model.onnx", None).unwrap_err();
             assert!(!err.to_string().is_empty(), "error should be non-empty: {err}");
         }
     }
