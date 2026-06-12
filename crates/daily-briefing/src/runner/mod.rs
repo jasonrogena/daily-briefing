@@ -11,6 +11,7 @@ use output_home_assistant::{HomeAssistantConfig, HomeAssistantOutput};
 use output_speech::{SpeechConfig, SpeechOutput};
 use output_webpage::{WebpageConfig, WebpageOutput};
 use processor_anthropic::{AnthropicConfig, AnthropicProcessor};
+use processor_openai::{OpenAiConfig, OpenAiProcessor};
 use std::env;
 use std::str::FromStr;
 use std::sync::Arc;
@@ -90,6 +91,20 @@ pub async fn run(config: Config) -> Result<(), BoxError> {
                 model: ac.model,
                 max_tokens: ac.max_tokens,
                 prompt: ac.prompt,
+            }))
+        }
+        ProcessorConfig::OpenAi(oc) => {
+            let api_key = oc
+                .api_key_env
+                .as_deref()
+                .map(|env| resolve_env(env, "OpenAI processor", "openai"))
+                .transpose()?;
+            Box::new(OpenAiProcessor::new(OpenAiConfig {
+                base_url: oc.base_url,
+                api_key,
+                model: oc.model,
+                max_tokens: oc.max_tokens,
+                prompt: oc.prompt,
             }))
         }
     };

@@ -6,6 +6,7 @@ members = [
     "crates/input-fever",
     "crates/input-home-assistant-metrics",
     "crates/processor-anthropic",
+    "crates/processor-openai",
     "crates/output-home-assistant",
     "crates/output-webpage",
     "crates/output-speech",
@@ -37,5 +38,6 @@ webserver = { path = "crates/webserver" }
 daily-briefing-core = { path = "crates/daily-briefing-core" }
 input-fever = { path = "crates/input-fever" }
 processor-anthropic = { path = "crates/processor-anthropic" }
+processor-openai = { path = "crates/processor-openai" }
 output-home-assistant = { path = "crates/output-home-assistant" }
 input-home-assistant-metrics = { path = "crates/input-home-assistant-metrics" }

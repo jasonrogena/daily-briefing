@@ -49,6 +49,7 @@ fn test_parse_valid_config() {
             assert_eq!(c.model, "claude-opus-4-6");
             assert_eq!(c.max_tokens, 1024);
         }
+        _ => panic!("expected Anthropic processor"),
     }
 
     match &config.outputs[0] {
@@ -217,6 +218,43 @@ title = "Daily Briefing"
 "#;
     let config: Config = toml::from_str(toml_str).unwrap();
     assert!(config.validate().is_err());
+}
+
+#[test]
+fn test_parse_openai_processor() {
+    let toml_str = r#"
+[[inputs]]
+name = "rss_feed"
+type = "fever"
+url = "http://yarr.local:7070/fever/"
+username_env = "u"
+password_env = "p"
+
+[processor]
+type = "open_ai"
+base_url = "http://192.168.10.3:8080/v1"
+model = "llama3"
+max_tokens = 512
+prompt = "Summarize."
+
+[[outputs]]
+name = "ha"
+type = "home_assistant"
+url = "http://ha.local:8123"
+token_env = "token"
+title = "Daily Summary"
+notification_id = "daily_briefing"
+"#;
+    let config: Config = toml::from_str(toml_str).unwrap();
+    match &config.processor {
+        ProcessorConfig::OpenAi(c) => {
+            assert_eq!(c.base_url.as_deref(), Some("http://192.168.10.3:8080/v1"));
+            assert!(c.api_key_env.is_none());
+            assert_eq!(c.model, "llama3");
+            assert_eq!(c.max_tokens, 512);
+        }
+        _ => panic!("expected OpenAI processor"),
+    }
 }
 
 #[test]

@@ -16,6 +16,7 @@ daily-briefing-core = { workspace = true }
 input-fever = { workspace = true }
 input-home-assistant-metrics = { workspace = true }
 processor-anthropic = { workspace = true }
+processor-openai = { workspace = true }
 output-home-assistant = { workspace = true }
 output-webpage = { workspace = true }
 output-speech = { workspace = true }

@@ -148,12 +148,14 @@ pub enum EntityKind {
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum ProcessorConfig {
     Anthropic(AnthropicProcessorConfig),
+    OpenAi(OpenAiProcessorConfig),
 }
 
 impl ProcessorConfig {
     pub fn type_name(&self) -> &str {
         match self {
             ProcessorConfig::Anthropic(_) => "anthropic",
+            ProcessorConfig::OpenAi(_) => "openai",
         }
     }
 }
@@ -162,6 +164,19 @@ impl ProcessorConfig {
 pub struct AnthropicProcessorConfig {
     /// Name of the environment variable that holds the Anthropic API key.
     pub api_key_env: String,
+    pub model: String,
+    pub max_tokens: u32,
+    pub prompt: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct OpenAiProcessorConfig {
+    /// Base URL for an OpenAI-compatible API. Defaults to `https://api.openai.com/v1`.
+    /// Set this to point at a local or third-party OpenAI-compatible endpoint.
+    pub base_url: Option<String>,
+    /// Name of the environment variable holding the API key.
+    /// Omit (or leave the env var unset) for local endpoints that don't require auth.
+    pub api_key_env: Option<String>,
     pub model: String,
     pub max_tokens: u32,
     pub prompt: String,
