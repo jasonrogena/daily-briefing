@@ -81,7 +81,7 @@ impl OpenAiClient {
     ) -> Result<String, Error> {
         let url = format!("{}/chat/completions", self.base_url);
         info!(model, max_tokens, "Sending request to OpenAI API");
-        debug!(content_chars = content.len(), "Content length");
+        debug!(content_chars = content.len(), content, "Sending content to model");
 
         let body = RequestBody {
             model,
